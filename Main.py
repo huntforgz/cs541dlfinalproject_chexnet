@@ -44,7 +44,7 @@ def runTrain():
 
     #---- Training settings: batch size, maximum number of epochs
     trBatchSize = 16
-    trMaxEpoch = 2
+    trMaxEpoch = 100
 
     #---- Parameters related to image transforms: size of the down-scaled image, cropped image
     imgtransResize = 256
@@ -63,8 +63,8 @@ def runTrain():
 def runTest():
 
     pathDirData = './database'
-    pathFileTest = './dataset/test_1.txt'
-    nnArchitecture = 'DENSE-NET-121'
+    pathFileTest = './dataset/test_sample.txt'
+    nnArchitecture = 'SE-RES-NET-50'
     nnIsTrained = True
     nnClassCount = 14
     trBatchSize = 16
