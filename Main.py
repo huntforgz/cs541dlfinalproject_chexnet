@@ -20,6 +20,7 @@ def runTrain():
     DENSENET169 = 'DENSE-NET-169'
     DENSENET201 = 'DENSE-NET-201'
     RESNET50 = 'RES-NET-50'
+    SE_RESNET50 = 'SE-RES-NET-50'
 
     timestampTime = time.strftime("%H%M%S")
     timestampDate = time.strftime("%d%m%Y")
@@ -31,19 +32,19 @@ def runTrain():
     #---- Paths to the files with training, validation and testing sets.
     #---- Each file should contains pairs [path to image, output vector]
     #---- Example: images_011/00027736_001.png 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-    pathFileTrain = './dataset/train_1.txt'
-    pathFileVal = './dataset/val_1.txt'
-    pathFileTest = './dataset/test_1.txt'
+    pathFileTrain = './dataset/train_sample.txt'
+    pathFileVal = './dataset/val_sample.txt'
+    pathFileTest = './dataset/test_sample.txt'
 
     #---- Neural network parameters: type of the network, is it pre-trained
     #---- on imagenet, number of classes
-    nnArchitecture = RESNET50
-    nnIsTrained = True
+    nnArchitecture = SE_RESNET50
+    nnIsTrained = False
     nnClassCount = 14
 
     #---- Training settings: batch size, maximum number of epochs
     trBatchSize = 16
-    trMaxEpoch = 1
+    trMaxEpoch = 2
 
     #---- Parameters related to image transforms: size of the down-scaled image, cropped image
     imgtransResize = 256

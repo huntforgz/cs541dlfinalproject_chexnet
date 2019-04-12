@@ -11,6 +11,7 @@ from sklearn.metrics import roc_auc_score
 
 import torchvision
 
+
 class ResNet50(nn.Module):
 
     def __init__(self, classCount, isTrained):
@@ -25,6 +26,20 @@ class ResNet50(nn.Module):
 
     def forward(self, x):
         x = self.resnet50(x)
+        return x
+import se_resnet
+
+class SE_ResNet50(nn.Module):
+
+    def __init__(self, classCount, isTrained):
+
+        super(SE_ResNet50, self).__init__()
+
+        self.se_resnet50 = se_resnet.se_resnet50(num_classes = classCount,pretrained=isTrained)
+
+
+    def forward(self, x):
+        x = self.se_resnet50(x)
         return x
 
 class DenseNet121(nn.Module):
