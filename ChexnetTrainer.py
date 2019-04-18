@@ -79,7 +79,7 @@ class ChexnetTrainer ():
         scheduler = ReduceLROnPlateau(optimizer, factor = 0.1, patience = 5, mode = 'min')
 
         #-------------------- SETTINGS: LOSS
-        loss = torch.nn.BCEWithLogitsLoss(size_average = True)
+        loss = torch.nn.BCELoss(size_average = True)
 
         #---- Load checkpoint
         if checkpoint != None:
