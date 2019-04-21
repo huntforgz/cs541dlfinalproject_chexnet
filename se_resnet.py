@@ -113,7 +113,7 @@ def se_resnet50(num_classes=1_000, pretrained=False):
     model = ResNet(SEBottleneck, [3, 4, 6, 3], num_classes=num_classes)
     model.avgpool = nn.AdaptiveAvgPool2d(1)
     if pretrained:
-        model.load_state_dict(model_zoo.load_url("https://www.dropbox.com/s/xpq8ne7rwa4kg4c/seresnet50-60a8950a85b2b.pkl"))
+        model.load_state_dict(model_zoo.load_url("http://data.lip6.fr/cadene/pretrainedmodels/se_resnet50-ce0d4300.pth"))
     return model
 
 
