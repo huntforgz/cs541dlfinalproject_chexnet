@@ -22,6 +22,7 @@ from DensenetModels import DenseNet201
 from DensenetModels import ResNet50
 from DensenetModels import SE_ResNet50
 from DatasetGenerator import DatasetGenerator
+import senet
 
 
 #--------------------------------------------------------------------------------
@@ -50,7 +51,13 @@ class ChexnetTrainer ():
         elif nnArchitecture == 'DENSE-NET-169': model = DenseNet169(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'DENSE-NET-201': model = DenseNet201(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'RES-NET-50': model = ResNet50(nnClassCount, nnIsTrained).cuda()
-        elif nnArchitecture == 'SE-RES-NET-50': model = SE_ResNet50(nnClassCount, nnIsTrained).cuda()
+        # elif nnArchitecture == 'SE-RES-NET-50': model = senet.SE_ResNet50(nnClassCount, nnIsTrained).cuda()
+        elif nnArchitecture == 'SE-RES-NET-50': model = senet.se_resnet50(nnClassCount, nnIsTrained).cuda()
+        elif nnArchitecture == 'SE-NET-154': model = senet.senet154(nnClassCount, nnIsTrained).cuda()
+
+
+
+
 
 
         model = torch.nn.DataParallel(model).cuda()
@@ -73,13 +80,13 @@ class ChexnetTrainer ():
         dataLoaderVal = DataLoader(dataset=datasetVal, batch_size=trBatchSize, shuffle=False, num_workers=24, pin_memory=True)
 
         #-------------------- SETTINGS: OPTIMIZER & SCHEDULER
-        # optimizer = optim.Adam (model.parameters(), lr=0.0001, betas=(0.9, 0.999), eps=1e-08, weight_decay=1e-5)
-        optimizer = optim.SGD(model.parameters(), lr=0.00001, momentum=0.9, weight_decay=1e-5)
+        optimizer = optim.Adam (model.parameters(), lr=0.00001, betas=(0.9, 0.999), eps=1e-08, weight_decay=1e-5)
+        # optimizer = optim.SGD(model.parameters(), lr=0.00001, momentum=0.9, weight_decay=1e-5)
 
         scheduler = ReduceLROnPlateau(optimizer, factor = 0.1, patience = 5, mode = 'min')
 
         #-------------------- SETTINGS: LOSS
-        loss = torch.nn.BCELoss(size_average = True)
+        loss = torch.nn.BCEWithLogitsLoss(size_average = True)
 
         #---- Load checkpoint
         if checkpoint != None:
@@ -212,8 +219,10 @@ class ChexnetTrainer ():
         if nnArchitecture == 'DENSE-NET-121': model = DenseNet121(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'DENSE-NET-169': model = DenseNet169(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'DENSE-NET-201': model = DenseNet201(nnClassCount, nnIsTrained).cuda()
-        elif nnArchitecture == 'RES-NET-50': model = torchvision.models.resnet50(nnClassCount, nnIsTrained).cuda()
-        elif nnArchitecture == 'SE-RES-NET-50': model = SE_ResNet50(nnClassCount, nnIsTrained).cuda()
+        # elif nnArchitecture == 'RES-NET-50': model = ResNet50(nnClassCount, nnIsTrained).cuda()
+        # elif nnArchitecture == 'SE-RES-NET-50': model = SE_ResNet50(nnClassCount, nnIsTrained).cuda()
+        elif nnArchitecture == 'SE-RES-NET-50': model = senet.se_resnet50(nnClassCount, nnIsTrained).cuda()
+        elif nnArchitecture == 'SE-NET-154': model = senet.senet154(nnClassCount, nnIsTrained).cuda()
 
 
         model = torch.nn.DataParallel(model).cuda()
