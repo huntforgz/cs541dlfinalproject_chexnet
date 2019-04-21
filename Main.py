@@ -9,7 +9,7 @@ from ChexnetTrainer import ChexnetTrainer
 
 def main ():
 
-    # runTest()
+    #runTest()
     runTrain()
 
 #--------------------------------------------------------------------------------
@@ -21,6 +21,7 @@ def runTrain():
     DENSENET201 = 'DENSE-NET-201'
     RESNET50 = 'RES-NET-50'
     SE_RESNET50 = 'SE-RES-NET-50'
+    SE_DenseNet121 = 'SE-DENSE-NET-121'
 
     timestampTime = time.strftime("%H%M%S")
     timestampDate = time.strftime("%d%m%Y")
@@ -32,14 +33,14 @@ def runTrain():
     #---- Paths to the files with training, validation and testing sets.
     #---- Each file should contains pairs [path to image, output vector]
     #---- Example: images_011/00027736_001.png 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-    pathFileTrain = './dataset/train_sample.txt'
-    pathFileVal = './dataset/val_sample.txt'
-    pathFileTest = './dataset/test_sample.txt'
+    pathFileTrain = './dataset/train.txt'
+    pathFileVal = './dataset/val.txt'
+    pathFileTest = './dataset/test.txt'
 
     #---- Neural network parameters: type of the network, is it pre-trained
     #---- on imagenet, number of classes
-    nnArchitecture = DENSENET121
-    nnIsTrained = True
+    nnArchitecture = SE_DenseNet121
+    nnIsTrained =   False
     nnClassCount = 14
 
     #---- Training settings: batch size, maximum number of epochs
@@ -51,6 +52,7 @@ def runTrain():
     imgtransCrop = 224
 
     pathModel = 'm-' + timestampLaunch + '.pth.tar'
+    #checkpoint = './models/m-21042019-055416.pth.tar'
 
     print ('Training NN architecture = ', nnArchitecture)
     ChexnetTrainer.train(pathDirData, pathFileTrain, pathFileVal, nnArchitecture, nnIsTrained, nnClassCount, trBatchSize, trMaxEpoch, imgtransResize, imgtransCrop, timestampLaunch, None)
@@ -63,15 +65,15 @@ def runTrain():
 def runTest():
 
     pathDirData = './database'
-    pathFileTest = './dataset/test_sample.txt'
-    nnArchitecture = 'SE-RES-NET-50'
+    pathFileTest = './dataset/test.txt'
+    nnArchitecture = 'RES-NET-50'
     nnIsTrained = True
     nnClassCount = 14
     trBatchSize = 16
     imgtransResize = 256
     imgtransCrop = 224
 
-    pathModel = './models/m-25012018-123527.pth.tar'
+    pathModel = './models/m-200419-resnet50.pth.tar'
 
     timestampLaunch = ''
 

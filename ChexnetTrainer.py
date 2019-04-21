@@ -21,8 +21,10 @@ from DensenetModels import DenseNet169
 from DensenetModels import DenseNet201
 from DensenetModels import ResNet50
 from DensenetModels import SE_ResNet50
+from DensenetModels import SE_DenseNet121
 from DatasetGenerator import DatasetGenerator
 import senet
+
 
 
 #--------------------------------------------------------------------------------
@@ -51,9 +53,11 @@ class ChexnetTrainer ():
         elif nnArchitecture == 'DENSE-NET-169': model = DenseNet169(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'DENSE-NET-201': model = DenseNet201(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'RES-NET-50': model = ResNet50(nnClassCount, nnIsTrained).cuda()
-        # elif nnArchitecture == 'SE-RES-NET-50': model = senet.SE_ResNet50(nnClassCount, nnIsTrained).cuda()
+        #elif nnArchitecture == 'SE-RES-NET-50': model = SE_ResNet50(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'SE-RES-NET-50': model = senet.se_resnet50(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'SE-NET-154': model = senet.senet154(nnClassCount, nnIsTrained).cuda()
+        elif nnArchitecture == 'SE-DENSE-NET-121': model = SE_DenseNet121(nnClassCount, nnIsTrained).cuda()
+
 
 
 
@@ -86,7 +90,7 @@ class ChexnetTrainer ():
         scheduler = ReduceLROnPlateau(optimizer, factor = 0.1, patience = 5, mode = 'min')
 
         #-------------------- SETTINGS: LOSS
-        loss = torch.nn.BCEWithLogitsLoss(size_average = True)
+        loss = torch.nn.BCELoss(size_average = True)
 
         #---- Load checkpoint
         if checkpoint != None:
@@ -219,10 +223,12 @@ class ChexnetTrainer ():
         if nnArchitecture == 'DENSE-NET-121': model = DenseNet121(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'DENSE-NET-169': model = DenseNet169(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'DENSE-NET-201': model = DenseNet201(nnClassCount, nnIsTrained).cuda()
-        # elif nnArchitecture == 'RES-NET-50': model = ResNet50(nnClassCount, nnIsTrained).cuda()
-        # elif nnArchitecture == 'SE-RES-NET-50': model = SE_ResNet50(nnClassCount, nnIsTrained).cuda()
+        elif nnArchitecture == 'RES-NET-50': model = ResNet50(nnClassCount, nnIsTrained).cuda()
+        #elif nnArchitecture == 'SE-RES-NET-50': model = SE_ResNet50(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'SE-RES-NET-50': model = senet.se_resnet50(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'SE-NET-154': model = senet.senet154(nnClassCount, nnIsTrained).cuda()
+        elif nnArchitecture == 'SE-DENSE-NET-121': model = SE_DenseNet121(nnClassCount, nnIsTrained).cuda()
+
 
 
         model = torch.nn.DataParallel(model).cuda()

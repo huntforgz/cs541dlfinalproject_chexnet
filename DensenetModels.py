@@ -10,6 +10,7 @@ from torch.utils.data import DataLoader
 from sklearn.metrics import roc_auc_score
 
 import torchvision
+import se_densenet
 
 
 class ResNet50(nn.Module):
@@ -49,6 +50,21 @@ class DenseNet121(nn.Module):
         super(DenseNet121, self).__init__()
 
         self.densenet121 = torchvision.models.densenet121(pretrained=isTrained)
+
+        kernelCount = self.densenet121.classifier.in_features
+
+        self.densenet121.classifier = nn.Sequential(nn.Linear(kernelCount, classCount), nn.Sigmoid())
+
+    def forward(self, x):
+        x = self.densenet121(x)
+        return x
+class SE_DenseNet121(nn.Module):
+
+    def __init__(self, classCount, isTrained):
+
+        super(SE_DenseNet121, self).__init__()
+
+        self.densenet121 = se_densenet.densenet121(pretrained=isTrained)
 
         kernelCount = self.densenet121.classifier.in_features
 
