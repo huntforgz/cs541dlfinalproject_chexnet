@@ -27,6 +27,11 @@ Many thanks to [zoogzog](https://github.com/zoogzog/chexnet) for detailed implem
 * Unpack archives in separate directories (e.g. images_001.tar.gz into images_001)
 * The original dataset contains over 100,000 images,which takes too long to train a model.Thus,we downsize the data with the  policy on :drop duplicate where patient id and label are the same from [Data_Entry_2017.csv
 ](https://nihcc.app.box.com/v/ChestXray-NIHCC/folder/36938765345).The smaller dataset contains almost half of         original(train_1.txt,test_1.txt,val_1.txt are the original split txt index for immages,while train.txt,test.txt,val.txt are  the final splitting txt file to train our model,which took much less time).
+The distribution of pathology of original and downsize data show below,which doesn't change much:
+![alt_text](readme/originaldatadistribution.png) 
+![alt_text](readme/downsizedatadistribution.png) 
+
+
   
 * Run **python Main.py** to run test using the pre-trained model (m-25012018-123527 for DenseNet121)
 * Use the **runTrain()** function in the **Main.py** to train a model from scratch
