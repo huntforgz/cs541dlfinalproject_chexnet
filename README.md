@@ -31,7 +31,7 @@ Many thanks to [zoogzog](https://github.com/zoogzog/chexnet) for detailed implem
 * Run **python Main.py** to run test using the pre-trained model (m-25012018-123527 for DenseNet121)
 * Use the **runTrain()** function in the **Main.py** to train a model from scratch
 
-This implementation allows to conduct experiments with 3 different densenet architectures: densenet-121, densenet-169,ResNet50,Se_ResNet50,Se_DenseNet121.
+This implementation allows to conduct experiments with 4 different densenet architectures: densenet-121, densenet-169,ResNet50,Se_ResNet50,Se_DenseNet121.
 
 * To generate CAM of a test file run script HeatmapGenerator 
 
