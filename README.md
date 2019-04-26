@@ -20,7 +20,7 @@ Many thanks to [zoogzog](https://github.com/zoogzog/chexnet) for detailed implem
 * Pytorch==0.3.1
 * 2 GPU(recommend NVIDIA TESLA P100 or equivalent)
 * OpenCV (for generating CAMs)
-* Linux OS(Google cloud platform,debian 9,8GPU(56G RAM)
+* Linux OS(Google cloud platform,debian 9,8CPU(56G RAM)
 
 ## Usage
 * Download the ChestX-ray14 database from [here](https://nihcc.app.box.com/v/ChestXray-NIHCC/folder/37178474737)
