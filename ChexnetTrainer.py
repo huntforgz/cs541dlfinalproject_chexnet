@@ -23,7 +23,6 @@ from DensenetModels import ResNet50
 from DensenetModels import SE_ResNet50
 from DensenetModels import SE_DenseNet121
 from DatasetGenerator import DatasetGenerator
-import senet
 
 
 
@@ -51,11 +50,8 @@ class ChexnetTrainer ():
         #-------------------- SETTINGS: NETWORK ARCHITECTURE
         if nnArchitecture == 'DENSE-NET-121': model = DenseNet121(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'DENSE-NET-169': model = DenseNet169(nnClassCount, nnIsTrained).cuda()
-        elif nnArchitecture == 'DENSE-NET-201': model = DenseNet201(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'RES-NET-50': model = ResNet50(nnClassCount, nnIsTrained).cuda()
-        #elif nnArchitecture == 'SE-RES-NET-50': model = SE_ResNet50(nnClassCount, nnIsTrained).cuda()
-        elif nnArchitecture == 'SE-RES-NET-50': model = senet.se_resnet50(nnClassCount, nnIsTrained).cuda()
-        elif nnArchitecture == 'SE-NET-154': model = senet.senet154(nnClassCount, nnIsTrained).cuda()
+        elif nnArchitecture == 'SE-RES-NET-50': model = SE_ResNet50(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'SE-DENSE-NET-121': model = SE_DenseNet121(nnClassCount, nnIsTrained).cuda()
 
 
@@ -222,11 +218,8 @@ class ChexnetTrainer ():
         #-------------------- SETTINGS: NETWORK ARCHITECTURE, MODEL LOAD
         if nnArchitecture == 'DENSE-NET-121': model = DenseNet121(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'DENSE-NET-169': model = DenseNet169(nnClassCount, nnIsTrained).cuda()
-        elif nnArchitecture == 'DENSE-NET-201': model = DenseNet201(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'RES-NET-50': model = ResNet50(nnClassCount, nnIsTrained).cuda()
-        #elif nnArchitecture == 'SE-RES-NET-50': model = SE_ResNet50(nnClassCount, nnIsTrained).cuda()
-        elif nnArchitecture == 'SE-RES-NET-50': model = senet.se_resnet50(nnClassCount, nnIsTrained).cuda()
-        elif nnArchitecture == 'SE-NET-154': model = senet.senet154(nnClassCount, nnIsTrained).cuda()
+        elif nnArchitecture == 'SE-RES-NET-50': model = SE_ResNet50(nnClassCount, nnIsTrained).cuda()
         elif nnArchitecture == 'SE-DENSE-NET-121': model = SE_DenseNet121(nnClassCount, nnIsTrained).cuda()
 
 

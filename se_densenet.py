@@ -6,17 +6,6 @@ import torch.utils.model_zoo as model_zoo
 from collections import OrderedDict
 from se_module import SELayer
 
-__all__ = ['DenseNet', 'densenet121', 'densenet169', 'densenet201', 'densenet161']
-
-
-model_urls = {
-    'densenet121': 'https://download.pytorch.org/models/densenet121-a639ec97.pth',
-    'densenet169': 'https://download.pytorch.org/models/densenet169-b2777c0a.pth',
-    'densenet201': 'https://download.pytorch.org/models/densenet201-c1103571.pth',
-    'densenet161': 'https://download.pytorch.org/models/densenet161-8d451a50.pth',
-}
-
-
 class _DenseLayer(nn.Sequential):
     def __init__(self, num_input_features, growth_rate, bn_size, drop_rate):
         super(_DenseLayer, self).__init__()
@@ -28,7 +17,7 @@ class _DenseLayer(nn.Sequential):
         self.add_module('relu2', nn.ReLU(inplace=True)),
         self.add_module('conv2', nn.Conv2d(bn_size * growth_rate, growth_rate,
                         kernel_size=3, stride=1, padding=1, bias=False)),
-        self.add_module("se_layer",SELayer(bn_size * growth_rate * 4))
+        self.add_module("se_layer",SELayer(growth_rate)),
         self.drop_rate = drop_rate
 
     def forward(self, x):
@@ -98,18 +87,18 @@ class DenseNet(nn.Module):
         self.features.add_module('norm5', nn.BatchNorm2d(num_features))
 
         # Linear layer
-        #nn.Sequential(nn.Linear(kernelCount, classCount), nn.Sigmoid())
-        self.classifier = nn.Sequential(nn.Linear(num_features, num_classes),nn.Sigmoid())
+        self.classifier = nn.Linear(num_features, num_classes)
+        # self.classifier = nn.Sequential(nn.Linear(num_features, num_classes),nn.Sigmoid())
 
         # Official init from torch repo.
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
-                nn.init.kaiming_normal_(m.weight)
+                nn.init.kaiming_normal(m.weight)
             elif isinstance(m, nn.BatchNorm2d):
-                nn.init.constant_(m.weight, 1)
-                nn.init.constant_(m.bias, 0)
+                nn.init.constant(m.weight, 1)
+                nn.init.constant(m.bias, 0)
             elif isinstance(m, nn.Linear):
-                nn.init.constant_(m.bias, 0)
+                nn.init.constant(m.bias, 0)
 
     def forward(self, x):
         features = self.features(x)

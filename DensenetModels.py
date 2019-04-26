@@ -58,6 +58,7 @@ class DenseNet121(nn.Module):
     def forward(self, x):
         x = self.densenet121(x)
         return x
+
 class SE_DenseNet121(nn.Module):
 
     def __init__(self, classCount, isTrained):
@@ -88,20 +89,4 @@ class DenseNet169(nn.Module):
 
     def forward (self, x):
         x = self.densenet169(x)
-        return x
-
-class DenseNet201(nn.Module):
-
-    def __init__ (self, classCount, isTrained):
-
-        super(DenseNet201, self).__init__()
-
-        self.densenet201 = torchvision.models.densenet201(pretrained=isTrained)
-
-        kernelCount = self.densenet201.classifier.in_features
-
-        self.densenet201.classifier = nn.Sequential(nn.Linear(kernelCount, classCount), nn.Sigmoid())
-
-    def forward (self, x):
-        x = self.densenet201(x)
         return x
