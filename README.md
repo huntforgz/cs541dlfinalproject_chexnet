@@ -1,7 +1,7 @@
 # CheXNet implementation in PyTorch
 
-Yet another PyTorch implementation of the [CheXNet](https://arxiv.org/abs/1711.05225) algorithm for pathology detection in 
-frontal chest X-ray images. This implementation is based on approach presented [here](https://github.com/arnoweng/CheXNet). Ten-crops 
+Reproduce the [CheXNet](https://arxiv.org/abs/1711.05225) algorithm for pathology detection in 
+frontal chest X-ray images. This implementation is based on approach presented [here](https://github.com/zoogzog/chexnet). Ten-crops 
 technique is used to transform images at the testing stage to get better accuracy. 
 
 The highest accuracy evaluated with AUROC was 0.8508 (see the model m-25012018-123527 in the models directory).
