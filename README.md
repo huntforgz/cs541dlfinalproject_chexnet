@@ -7,6 +7,10 @@ technique is used to transform images at the testing stage to get better accurac
 The highest accuracy evaluated with AUROC was 0.8508 (with original data set,see the model m-25012018-123527 in the models directory).
 The same training (70%), validation (10%) and testing (20%) datasets were used as in [this](https://github.com/arnoweng/CheXNet) 
 implementation.
+
+
+Result for all models show in **result.pdf**.
+
 Many thanks to [zoogzog](https://github.com/zoogzog/chexnet) for detailed implematation of tranmsformatian dataset and auroc comoutation.
 
 ![alt text](test/heatmap.png)
@@ -21,6 +25,8 @@ Many thanks to [zoogzog](https://github.com/zoogzog/chexnet) for detailed implem
 ## Usage
 * Download the ChestX-ray14 database from [here](https://nihcc.app.box.com/v/ChestXray-NIHCC/folder/37178474737)
 * Unpack archives in separate directories (e.g. images_001.tar.gz into images_001)
+* The original dataset contains over 100,000 images,which takes too long to train a model.Thus,we downsize the data with the  policy on :drop duplicate where patient id and label are the same.The smaller dataset contains almost half of         original(train_1.txt,test_1.txt,val_1.txt are the original split txt index for immages,while train.txt,test.txt,val.txt are  the final splitting txt file to train our model,which took much less time)
+  
 * Run **python Main.py** to run test using the pre-trained model (m-25012018-123527)
 * Use the **runTrain()** function in the **Main.py** to train a model from scratch
 
@@ -34,6 +40,7 @@ The highest accuracy 0.8508 was achieved by the model m-25012018-123527 (see the
 
 | Pathology     | AUROC         |
 | ------------- |:-------------:|
+|    Mean       | 0.8508        |
 | Atelectasis   | 0.8321        |
 | Cardiomegaly  | 0.9107        |
 | Effusion      | 0.8860        |
@@ -50,5 +57,5 @@ The highest accuracy 0.8508 was achieved by the model m-25012018-123527 (see the
 | Hernia        | 0.9416        |
 
 ## Computation time
-The training was done using single Tesla P100 GPU and took approximately 22h.
+The training was done using double Tesla P100 GPU and 6h on downsize data.
 
