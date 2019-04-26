@@ -59,7 +59,7 @@ The highest accuracy 0.8508 was achieved by the model m-25012018-123527 for Dens
 ## Computation time
 The training was done using double Tesla P100 GPU and 6h on downsize data.
 
-##Reference paper
+## Reference paper
 [CheXNet](https://arxiv.org/abs/1711.05225),[Squeeze-and-Excitation Networks](https://arxiv.org/pdf/1709.01507.pdf),
 [DenseNet](https://arxiv.org/pdf/1608.06993.pdf) and [ResNet](https://arxiv.org/pdf/1512.03385.pdf).
 
