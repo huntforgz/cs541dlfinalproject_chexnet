@@ -4,16 +4,19 @@ Reproduce the [CheXNet](https://arxiv.org/abs/1711.05225) algorithm for patholog
 frontal chest X-ray images. This implementation is based on approach presented [here](https://github.com/zoogzog/chexnet). Ten-crops 
 technique is used to transform images at the testing stage to get better accuracy. 
 
-The highest accuracy evaluated with AUROC was 0.8508 (see the model m-25012018-123527 in the models directory).
+The highest accuracy evaluated with AUROC was 0.8508 (with original data set,see the model m-25012018-123527 in the models directory).
 The same training (70%), validation (10%) and testing (20%) datasets were used as in [this](https://github.com/arnoweng/CheXNet) 
 implementation.
+Many thanks to [zoogzog](https://github.com/zoogzog/chexnet) for detailed implematation of tranmsformatian dataset and auroc comoutation.
 
 ![alt text](test/heatmap.png)
 
 ## Prerequisites
-* Python 3.5.2
-* Pytorch
+* Python 3.6
+* Pytorch==0.3.1
+* GPU(recommend NVIDIA TESLA P100 or equivalent)
 * OpenCV (for generating CAMs)
+*Linux OS
 
 ## Usage
 * Download the ChestX-ray14 database from [here](https://nihcc.app.box.com/v/ChestXray-NIHCC/folder/37178474737)
